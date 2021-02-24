@@ -1,6 +1,7 @@
 import React from "react"
 import { AnimalCard } from "./animal/AnimalCard"
 import "./animal/Animal.css"
+import "./Kennel.css"
 
 export const Kennel = () => (
     <>
