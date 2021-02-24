@@ -1,6 +1,7 @@
 import React from "react"
 import { AnimalCard } from "./animal/AnimalCard.js"
 import { CustomerCard } from "./customers/Customer.js"
+import { EmployeeCard } from "./employees/Employee.js"
 import "./animal/Animal.css"
 import "./Kennel.css"
 
@@ -26,6 +27,14 @@ export const Kennel = () => (
             <CustomerCard />
             <CustomerCard />
             <CustomerCard />
+            <CustomerCard />
+        </article>
+
+        <h2>Employees</h2>
+        <article className="employees">
+            <EmployeeCard />
+            <EmployeeCard />
+            <EmployeeCard />
         </article>
     </>
 )
