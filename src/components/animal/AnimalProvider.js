@@ -1,6 +1,5 @@
 import React, { useState, createContext } from "react"
-import { AnimalProvider } from "./animal/AnimalProvider"
-import { AnimalList } from "./animal/AnimalList"
+
 
 
 // The context is imported and used by individual components that need data
@@ -38,10 +37,10 @@ export const AnimalProvider = (props) => {
         allows any child elements to access them.
     */
     return (
-        <AnimalContext.Provider>
-            <Route exact path="/animals">
-                <AnimalList />
-            </Route>
+        <AnimalContext.Provider value={{
+            animals, getAnimals, addAnimal
+        }}>
+            {props.children}
         </AnimalContext.Provider>
     )
 }
