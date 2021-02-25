@@ -7,6 +7,7 @@ import { PropsAndState } from "./PropsAndState.js"
 import "./animal/Animal.css"
 import "./Kennel.css"
 
+//must pass in parameter for PropsAndState because the function needs one
 export const Kennel = () => (
     <>
         <h2>Nashville Kennels</h2>
