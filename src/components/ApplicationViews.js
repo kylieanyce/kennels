@@ -1,44 +1,38 @@
-import React, { useState, createContext } from "react"
+import React from "react"
+import { Route } from "react-router-dom"
+import { Home } from "./Home"
+import { LocationCard } from "./locations/Location"
+import { AnimalCard } from "./animal/AnimalCard"
+import { CustomerCard } from "./customers/Customer"
+import { EmployeeCard } from "./employees/Employee"
 
-// The context is imported and used by individual components that need data
-export const AnimalContext = createContext()
-
-// This component establishes what data can be used.
-export const AnimalProvider = (props) => {
-    //setting two empty vars to be a state var and a function
-    //useState will be the value of these vars
-    const [animals, setAnimals] = useState([])
-    //fetch call returns data to setAnimals and useState changes
-    //animals var to be set to the retrieved data
-    const getAnimals = () => {
-        return fetch("http://localhost:8088/animals?_expand=location")
-        .then(res => res.json())
-        .then(setAnimals)
-    }
-    //this fetch call takes an animalObj parameter to post to the API
-    //then gets animals from API
-    const addAnimal = animalObj => {
-        return fetch("http://localhost:8088/animals", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(animalObj)
-        })
-        .then(getAnimals)
-    }
-
-    /*
-        You return a context provider which has the
-        `animals` state, `getAnimals` function,
-        and the `addAnimal` function as keys. This
-        allows any child elements to access them.
-    */
+export const ApplicationViews = () => {
     return (
-        <AnimalContext.Provider value={{
-            animals, getAnimals, addAnimal
-        }}>
-            {props.children}
-        </AnimalContext.Provider>
+        <>
+            {/* Render the location list when http://localhost:3000/ */}
+            <Route exact path="/">
+                <Home />
+            </Route>
+
+            {/* Render the animal list when http://localhost:3000/animals */}
+            <Route path="/locations">
+                <LocationCard />
+            </Route>
+
+            {/* Render the animal list when http://localhost:3000/animals */}
+            <Route path="/animal">
+                <AnimalCard />
+            </Route>
+
+            {/* Render the animal list when http://localhost:3000/animals */}
+            <Route path="/customers">
+                <CustomerCard />
+            </Route>
+
+            {/* Render the animal list when http://localhost:3000/animals */}
+            <Route path="/employees">
+                <EmployeeCard />
+            </Route>
+        </>
     )
 }
