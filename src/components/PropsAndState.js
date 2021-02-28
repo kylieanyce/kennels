@@ -1,8 +1,8 @@
 import React, { useState } from "react"
 
-//pass in parameter of someone's name
+//pass in prop parameter
 export const PropsAndState = ({ yourName }) => {
-    //sets two new vars with useState
+    //useState returns two pieces of data
     let [countClicks, setCountClicks] = useState(0)
 
     const handleClick = () => {
