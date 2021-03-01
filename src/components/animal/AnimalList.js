@@ -32,7 +32,6 @@ export const AnimalList = () => {
             <button onClick={() => { history.push("/animal/create") }}>
                 Add Animal
             </button>
-            {console.log("AnimalList: Render", animals)}
             {
                 animals.map(animalObj => {
                     //for each animal, find customer that has same id and animal.customerId

@@ -1,5 +1,7 @@
 import React, { useContext, useEffect } from "react"
 import { EmployeeContext } from "./EmployeeProvider"
+import { LocationContext } from "./LocationProvider"
+import { useHistory } from "react-router-dom"
 import { EmployeeCard } from "./Employee"
 import "./Employee.css"
 
@@ -7,23 +9,29 @@ import "./Employee.css"
 export const EmployeeList = () => {
     // This state changes when `getEmployees()` is invoked below
     const { employees, getEmployees } = useContext(EmployeeContext)
+    const { locations, getLocations } = useContext(LocationContext)
     //useContext carries fetch call data as an object
+    const history = useHistory()
 
     //useEffect - reach out to the world for something
     useEffect(() => {
-        console.log("EmployeeList: useEffect - getEmployees")
         //calls getEmployees which then populates Employees with data from API 
-        getEmployees()
-        
+        getLocations()
+            .then(getEmployees)
     }, [])
 
     //maps through Employees array of data from API
     return (
         <div className="employees">
-            {console.log("EmployeeList: Render", employees)}
+            <button onClick={() => { history.push("/employees/create") }}>
+                Add Employee
+            </button>
             {
-                employees.map(employee => {
-                    return <EmployeeCard key={employee.id} employee={employee} />
+                employees.map(employeeObj => {
+                    const clinic = locations.find(l => l.id === employeeObj.locationId)
+                    return <EmployeeCard key={employee.id} employee={employeeObj}
+                        location={clinic}
+                    />
                 })
             }
         </div>
