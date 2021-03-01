@@ -15,11 +15,10 @@ export const AnimalList = () => {
     // useEffect actually calls the fetch function getAnimals,
     // changing the state of animals by filling it with data
     useEffect(() => {
-        console.log("AnimalList: useEffect - getAnimals")
+        //getAnimals last, something to do with .map???
         getLocations()
             .then(getCustomers)
             .then(getAnimals)
-            console.log(animals, locations, customers)
     }, [])
 
     //maps through animals array of data from API
@@ -28,7 +27,9 @@ export const AnimalList = () => {
             {console.log("AnimalList: Render", animals)}
             {
                 animals.map(animalObj => {
+                    //for each animal, find customer that has same id and animal.customerId
                     const owner = customers.find(c => c.id === animalObj.customerId)
+                    //then find each location with same id as animal.locationID
                     const clinic = locations.find(l => l.id === animalObj.locationId)
                     //uses AnimalCard to convert each animal object to HTML
                     //the id is set to key so that each time it iterates through, a new
@@ -36,6 +37,7 @@ export const AnimalList = () => {
                     //which is set to animalObj. AnimalCard takes in a props
                     //parameter so that's where it goes.
                     return <AnimalCard key={animalObj.id}
+                    //send info as props to AnimalCard
                         location={clinic}
                         customer={owner}
                         animal={animalObj} />
