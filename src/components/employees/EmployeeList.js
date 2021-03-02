@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react"
 import { EmployeeContext } from "./EmployeeProvider"
-import { LocationContext } from "./LocationProvider"
+import { LocationContext } from "../locations/LocationProvider"
 import { useHistory } from "react-router-dom"
 import { EmployeeCard } from "./Employee"
 import "./Employee.css"
@@ -29,7 +29,7 @@ export const EmployeeList = () => {
             {
                 employees.map(employeeObj => {
                     const clinic = locations.find(l => l.id === employeeObj.locationId)
-                    return <EmployeeCard key={employee.id} employee={employeeObj}
+                    return <EmployeeCard key={employeeObj.id} employee={employeeObj}
                         location={clinic}
                     />
                 })

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react"
 import { LocationContext } from "../locations/LocationProvider"
-import { EmployeeContext } from "../employees/EmployeeProvider"
+import { EmployeeContext } from "./EmployeeProvider"
 import "./employee.css"
 import { useHistory } from 'react-router-dom';
 
@@ -21,7 +21,7 @@ export const EmployeeForm = () => {
     and locations state on initialization, so we can provide their data in the form dropdowns
     */
     useEffect(() => {
-        getLocations().then(getEmployees)
+        getLocations()
     }, [])
 
     //when a field changes, update state. The return will re-render and display based on the values in state
