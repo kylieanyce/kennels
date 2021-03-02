@@ -11,7 +11,6 @@ export const LocationList = () => {
 
     //useEffect - reach out to the world for something
     useEffect(() => {
-        console.log("LocationList: useEffect - getLocations")
         //calls getlocations which then populates locations with data from API 
         getLocations()
         
@@ -20,7 +19,6 @@ export const LocationList = () => {
     //maps through locations array of data from API
     return (
         <div className="locations">
-            {console.log("LocationList: Render", locations)}
             {
                 locations.map(location => {
                     return <LocationCard key={location.id} location={location} />

@@ -11,7 +11,6 @@ export const CustomerList = () => {
 
     //useEffect - reach out to the world for something
     useEffect(() => {
-        console.log("CustomerList: useEffect - getCustomers")
         //calls getCustomers which then populates customers with data from API 
         getCustomers()
         
@@ -20,7 +19,6 @@ export const CustomerList = () => {
     //maps through customers array of data from API
     return (
         <div className="customers">
-            {console.log("CustomerList: Render", customers)}
             {
                 customers.map(customer => {
                     return <CustomerCard key={customer.id} customer={customer} />

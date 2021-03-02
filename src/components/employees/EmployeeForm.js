@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react"
 import { LocationContext } from "../locations/LocationProvider"
 import { EmployeeContext } from "./EmployeeProvider"
-import "./employee.css"
 import { useHistory } from 'react-router-dom';
 
 export const EmployeeForm = () => {
