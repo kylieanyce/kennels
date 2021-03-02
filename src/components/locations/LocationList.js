@@ -11,13 +11,13 @@ export const LocationList = () => {
     const { locations, getLocations } = useContext(LocationContext)
     const { employees, getEmployees } = useContext(EmployeeContext)
     //useContext carries fetch call data as an object
+    const history = useHistory()
 
     //useEffect - reach out to the world for something
     useEffect(() => {
         //calls getlocations which then populates locations with data from API 
         getEmployees()
             .then(getLocations)
-
     }, [])
 
     //maps through locations array of data from API

@@ -7,7 +7,7 @@ export const LocationForm = () => {
     const { addLocation } = useContext(LocationContext)
     const { employees, getEmployees } = useContext(EmployeeContext)
 
-    const [locations, setLocations] = useState({
+    const [location, setLocation] = useState({
         name: "",
         employeeId: 0,
         id: 0
@@ -69,10 +69,16 @@ export const LocationForm = () => {
             </fieldset>
             <fieldset>
                 <div className="form-group">
+                    <label htmlFor="address">address:</label>
+                    <input type="text" id="address" onChange={handleControlledInputChange} required autoFocus className="form-control" placeholder="location address" value={location.address} />
+                </div>
+            </fieldset>
+            <fieldset>
+                <div className="form-group">
                     <label htmlFor="employee">Assign to employee: </label>
                     <select defaultValue={location.employeeId} name="employeeId" id="employeeId" onChange={handleControlledInputChange} className="form-control" >
                         <option value="0">Select a employee</option>
-                        {locations.map(e => (
+                        {employees.map(e => (
                             <option key={e.id} value={e.id}>
                                 {e.name}
                             </option>
