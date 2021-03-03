@@ -5,7 +5,7 @@ import { Link } from "react-router-dom"
 
 //returns HTML for each prop passed in as argument
 
-export const AnimalCard = ({ animal }) => {
+export const AnimalCard = ({ animal , location, customer}) => {
     return (
         <section className="animal">
             <h3 className="animal__name">
