@@ -12,7 +12,7 @@ export const LocationProvider = (props) => {
     //fetch call returns data to setAnimals and useState changes
     //animals var to be set to the retrieved data
     const getLocations = () => {
-        return fetch("http://localhost:8088/locations")
+        return fetch("http://localhost:8088/locations/?_embed=employees&_embed=animals")
         .then(res => res.json())
         .then(setLocations)
     }

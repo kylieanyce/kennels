@@ -7,9 +7,11 @@ export const LocationCard = ({ location }) => {
         <section className="location">
             <h3 className="location__name">
                 <Link to={`/locations/detail/${location.id}`}>
-                    { location.name}
+                    { location.name }
                 </Link>
             </h3>
+            <p>{location.animals.length} Animals</p>
+            <p>{location.employees.length} Employees</p>
         </section>
     )
 }

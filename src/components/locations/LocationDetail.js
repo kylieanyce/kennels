@@ -20,7 +20,14 @@ export const LocationDetail = () => {
     return (
         <section className="location">
             <h3 className="location__name">{location.name}</h3>
-            <div className="location__address">Address: {location.location?.address}</div>
+            <div className="location__employees"><strong>Employees: </strong>{location.employees?.map(e => (
+                <div key={e.id} >{e.name}</div>
+            ))}
+            </div>
+            <div className="location__animals"><strong>Animals: </strong>{location.animals?.map(e => (
+                <div key={e.id} >{e.name}</div>
+            ))}
+            </div>
         </section>
     )
 }
