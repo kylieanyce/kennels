@@ -20,6 +20,7 @@ export const LocationDetail = () => {
     return (
         <section className="location">
             <h3 className="location__name">{location.name}</h3>
+            <p className="location__name">{location.address}</p>
             <div className="location__employees"><strong>Employees: </strong>{location.employees?.map(e => (
                 <div key={e.id} >{e.name}</div>
             ))}

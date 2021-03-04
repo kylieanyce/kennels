@@ -12,7 +12,7 @@ export const LocationProvider = (props) => {
     //fetch call returns data to setlocations and useState changes
     //locations var to be set to the retrieved data
     const getLocations = () => {
-        return fetch("http://localhost:8088/locations/?_embed=employees&_embed=locations")
+        return fetch("http://localhost:8088/locations/?_embed=employees&_embed=animals")
             .then(res => res.json())
             .then(setLocations)
     }
@@ -31,7 +31,7 @@ export const LocationProvider = (props) => {
     }
 
     const getLocationById = (id) => {
-        return fetch(`http://localhost:8088/locations/${id}?_embed=employees&_embed=locations`)
+        return fetch(`http://localhost:8088/locations/${id}?_embed=employees&_embed=animals`)
             .then(res => res.json())
     }
 

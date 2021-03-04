@@ -4,63 +4,78 @@ import { EmployeeContext } from "../employees/EmployeeProvider"
 import { useHistory, useParams } from 'react-router-dom';
 
 export const LocationForm = () => {
-    const { addLocation } = useContext(LocationContext)
+    const { addLocation, getLocationById, updateLocation } = useContext(LocationContext)
     const { employees, getEmployees } = useContext(EmployeeContext)
 
     const [location, setLocation] = useState({
         name: "",
+        address: "",
         employeeId: 0,
         id: 0
     });
 
+    const [isLoading, setIsLoading] = useState(true);
+
+    const { locationId } = useParams();
     const history = useHistory();
 
-    /*
-    Reach out to the world and get customers state
-    and employees state on initialization, so we can provide their data in the form dropdowns
-    */
-    useEffect(() => {
-        getEmployees()
-    }, [])
 
-    //when a field changes, update state. The return will re-render and display based on the values in state
-    // NOTE! What's happening in this function can be very difficult to grasp. Read it over many times and ask a lot questions about it.
-    //Controlled component
     const handleControlledInputChange = (event) => {
-        /* When changing a state object or array,
-        always create a copy, make changes, and then set state.*/
+        //When changing a state object or array,
+        //always create a copy make changes, and then set state.
         const newLocation = { ...location }
-        let selectedVal = event.target.value
-        // forms always provide values as strings. But we want to save the ids as numbers. This will cover both customer and location ids
-        if (event.target.id.includes("Id")) {
-            selectedVal = parseInt(selectedVal)
-        }
-        /* employee is an object with properties.
-        Set the property to the new value
-        using object bracket notation. */
-        newLocation[event.target.id] = selectedVal
-        // update state
+        //location is an object with properties.
+        //set the property to the new value
+        newLocation[event.target.id] = event.target.value
+        //update state
         setLocation(newLocation)
     }
 
-    const handleClickSaveLocation = (event) => {
-        event.preventDefault() //Prevents the browser from submitting the form
-
-        const employeeId = location.employeeId
-
-        if (employeeId === 0) {
-            window.alert("Please select an employee and a customer")
+    const handleSaveLocation = () => {
+        if (parseInt(location.employeeId) === 0) {
+            window.alert("Please select a employee")
         } else {
-            //invoke addEmployee passing employee as an argument.
-            //once complete, change the url and display the employee list
-            addLocation(location)
-                .then(() => history.push("/locations"))
+            //disable the button - no extra clicks
+            setIsLoading(true);
+            // This is how we check for whether the form is being used for editing or creating. If the URL that got us here has an id number in it, we know we want to update an existing record of an location
+            if (locationId) {
+                //PUT - update
+                updateLocation({
+                    id: location.id,
+                    name: location.name,
+                    address: location.address,
+                    employeeId: parseInt(location.employeeId),
+                })
+                    .then(() => history.push(`/locations/detail/${location.id}`))
+            } else {
+                //POST - add
+                addLocation({
+                    name: location.name,
+                    address: location.address,
+                    employeeId: parseInt(location.employeeId),
+                })
+                    .then(() => history.push("/locations"))
+            }
         }
     }
 
+    useEffect(() => {
+        getEmployees().then(() => {
+            if (locationId) {
+                getLocationById(locationId)
+                    .then(location => {
+                        setLocation(location)
+                        setIsLoading(false)
+                    })
+            } else {
+                setIsLoading(false)
+            }
+        })
+    }, [])
+
     return (
         <form className="locationForm">
-            <h2 className="locationForm__title">New location</h2>
+            <h2 className="locationForm__title">{locationId ? "Edit Location" : "Add Location"}</h2>
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="name">location name:</label>
@@ -73,23 +88,13 @@ export const LocationForm = () => {
                     <input type="text" id="address" onChange={handleControlledInputChange} required autoFocus className="form-control" placeholder="location address" value={location.address} />
                 </div>
             </fieldset>
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="employee">Assign to employee: </label>
-                    <select defaultValue={location.employeeId} name="employeeId" id="employeeId" onChange={handleControlledInputChange} className="form-control" >
-                        <option value="0">Select a employee</option>
-                        {employees.map(e => (
-                            <option key={e.id} value={e.id}>
-                                {e.name}
-                            </option>
-                        ))}
-                    </select>
-                </div>
-            </fieldset>
             <button className="btn btn-primary"
-                onClick={handleClickSaveLocation}>
-                Save location
-            </button>
+                disabled={isLoading}
+                onClick={event => {
+                    event.preventDefault()
+                    handleSaveLocation()
+                }}>
+            {locationId ? "Save Location" : "Add Location"}</button>
         </form>
     )
 }
