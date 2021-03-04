@@ -5,36 +5,28 @@ import { CustomerContext } from "../customers/CustomerProvider"
 import "./Animal.css"
 import { useHistory } from 'react-router-dom';
 
+// creates form to add an animal with location and customer drop down menu
 export const AnimalForm = () => {
+    // grabs context for Animal, Location, and Customer
     const { addAnimal } = useContext(AnimalContext)
     const { locations, getLocations } = useContext(LocationContext)
     const { customers, getCustomers } = useContext(CustomerContext)
-
-    /*
-    With React, we do not target the DOM with `document.querySelector()`. Instead, our return (render) reacts to state or props.
-
-    Define the intial state of the form inputs with useState()
-    */
-
+    // useState destructures into var and function, sets animal to be an object
     const [animal, setAnimal] = useState({
         name: "",
         breed: "",
         locationId: 0,
         customerId: 0
     });
-
+    // useHistory puts log of previous clicks into array names history
     const history = useHistory();
-
-    /*
-    Reach out to the world and get customers state
-    and locations state on initialization, so we can provide their data in the form dropdowns
-    */
+    // useEffect changes customer and location state by calling API 
+    // and setting those vars
     useEffect(() => {
         getCustomers().then(getLocations)
     }, [])
 
     //when a field changes, update state. The return will re-render and display based on the values in state
-    // NOTE! What's happening in this function can be very difficult to grasp. Read it over many times and ask a lot questions about it.
     //Controlled component
     const handleControlledInputChange = (event) => {
         /* When changing a state object or array,

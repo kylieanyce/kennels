@@ -1,7 +1,6 @@
 import React, { useState, createContext } from "react"
 
 
-
 // The context is imported and used by individual components that need data
 export const AnimalContext = createContext()
 
@@ -29,24 +28,20 @@ export const AnimalProvider = (props) => {
         .then(response => response.json())
         .then(getAnimals)
     }
-
+    // gets specific animal with matching id parameter
     const getAnimalById = (id) => {
         return fetch(`http://localhost:8088/animals/${id}?_expand=location&_expand=customer`)
             .then(res => res.json())
     }
-
+    // deletes an animal with specific id parameter then getAnimals
     const releaseAnimal = animalId => {
         return fetch(`http://localhost:8088/animals/${animalId}`, {
             method: "DELETE"
         })
             .then(getAnimals)
     }
-    /*
-        You return a context provider which has the
-        `animals` state, `getAnimals` function,
-        and the `addAnimal` function as keys. This
-        allows any child elements to access them.
-    */
+    // puts array and functions into AnimalContext as objects so they 
+    // can be accessed in other components
     return (
         <AnimalContext.Provider value={{
             animals, getAnimals, addAnimal, getAnimalById, releaseAnimal
