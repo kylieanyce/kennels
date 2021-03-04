@@ -4,8 +4,9 @@ import { Link } from "react-router-dom"
 
 
 //returns HTML for each prop passed in as argument
-
-export const AnimalCard = ({ animal , location, customer}) => {
+export const AnimalCard = ({ animal }) => {
+    //the div is what is shown for each animal list before it is selected
+    //the link takes user to another component that lists details differently
     return (
         <section className="animal">
             <h3 className="animal__name">
