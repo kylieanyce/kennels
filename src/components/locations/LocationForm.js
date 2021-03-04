@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react"
 import { LocationContext } from "../locations/LocationProvider"
 import { EmployeeContext } from "../employees/EmployeeProvider"
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
 export const LocationForm = () => {
     const { addLocation } = useContext(LocationContext)

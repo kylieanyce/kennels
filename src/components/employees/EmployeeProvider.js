@@ -14,8 +14,8 @@ export const EmployeeProvider = (props) => {
     //employees var to be set to the retrieved data
     const getEmployees = () => {
         return fetch("http://localhost:8088/employees")
-        .then(res => res.json())
-        .then(setEmployees)
+            .then(res => res.json())
+            .then(setEmployees)
     }
     //this fetch call takes an employeeObj parameter to post to the API
     //then gets employees from API
@@ -27,8 +27,19 @@ export const EmployeeProvider = (props) => {
             },
             body: JSON.stringify(employeeObj)
         })
-        .then(response => response.json())
-        .then(getEmployees)
+            .then(response => response.json())
+            .then(getEmployees)
+    }
+
+    const updateEmployee = employee => {
+        return fetch(`http://localhost:8088/employees/${employee.id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(employee)
+        })
+            .then(getEmployees)
     }
 
     const getEmployeeById = (id) => {
@@ -38,12 +49,12 @@ export const EmployeeProvider = (props) => {
     /*
         You return a context provider which has the
         `employees` state, `getEmployees` function,
-        and the `addAnimal` function as keys. This
+        and the `addemployee` function as keys. This
         allows any child elements to access them.
     */
     return (
         <EmployeeContext.Provider value={{
-            employees, getEmployees, addEmployee, getEmployeeById
+            employees, getEmployees, addEmployee, getEmployeeById, updateEmployee
         }}>
             {props.children}
         </EmployeeContext.Provider>
