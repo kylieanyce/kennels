@@ -38,6 +38,9 @@ export const AnimalDetail = () => {
             <div className="animal__location">Location: {animal.location?.name}</div>
             <div className="animal__owner">Customer: {animal.customer?.name}</div>
             {/* the button has an event handler that calls the handleRelease (delete) function */}
+            <button onClick={() => {
+                history.push(`/animals/edit/${animal.id}`)
+            }}>Edit</button>
             <button onClick={handleRelease}>Release Animal</button>
         </section>
     )
