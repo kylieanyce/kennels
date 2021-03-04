@@ -28,6 +28,9 @@ export const LocationDetail = () => {
                 <div key={e.id} >{e.name}</div>
             ))}
             </div>
+            <button onClick={() => {
+                history.push(`/locations/edit/${location.id}`)
+            }}>Edit</button>
         </section>
     )
 }
