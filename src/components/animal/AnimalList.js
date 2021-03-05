@@ -26,9 +26,10 @@ export const AnimalList = () => {
             .then(getAnimals)
     }, [])
 
-    //maps through animals array of data from API
+    // contains add animal button and renders animal list
     return (
         <div className="animals">
+            {/* this button directs the user to the animal form function to add animal */}
             <button onClick={() => { history.push("/animal/create") }}>
                 Add Animal
             </button>
