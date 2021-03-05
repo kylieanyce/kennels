@@ -21,14 +21,17 @@ export const AnimalDetail = () => {
                 setAnimal(response)
             })
     }, [])
-    // deletes and animal and reroutes user back to animal list
+    // deletes an animal and reroutes user back to animal list
     const handleRelease = () => {
+        //takes animal.id as parameter and deletes from API
         releaseAnimal(animal.id)
             .then(() => {
-                // push /animals link to most recent history instance
+                // push /animals link to most recent history, so 
+                // DOM re-renders animal list
                 history.push("/animals")
             })
     }
+    
     // render for each specific animal after clicked on details link
     return (
         <section className="animal">
@@ -37,7 +40,10 @@ export const AnimalDetail = () => {
             {/* location is the embeded array on the animal object. Use ? for embedded items*/}
             <div className="animal__location">Location: {animal.location?.name}</div>
             <div className="animal__owner">Customer: {animal.customer?.name}</div>
-            {/* the button has an event handler that calls the handleRelease (delete) function */}
+            {/* the button has an event handler that calls the handleRelease (delete) function.
+            Both of these buttons have an event handler, one is an inline function, the other
+            calls a function already defined, but they each do the same thing: take the
+            animal.id as parameter and either edit or delete it from the API*/}
             <button onClick={() => {
                 history.push(`/animals/edit/${animal.id}`)
             }}>Edit</button>
