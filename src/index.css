@@ -6,14 +6,14 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: darkslategrey;
-  color: wheat
+  color: lightslategray;
 }
 
 a {
-  color: lightslategray
+  color: lightslategray;
 }
 a:visited {
-  color: peru
+  color: peru;
 }
 
 code {
