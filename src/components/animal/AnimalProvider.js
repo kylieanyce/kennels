@@ -8,6 +8,8 @@ export const AnimalContext = createContext()
 export const AnimalProvider = (props) => {
     //useState sets the var and function it returns, initially they are empty
     const [animals, setAnimals] = useState([])
+
+    const [ searchTerms, setSearchTerms ] = useState("")
     //fetch call returns data to setAnimals and useState changes
     //animals var to be set to the retrieved data
     const getAnimals = () => {
@@ -55,7 +57,8 @@ export const AnimalProvider = (props) => {
     // can be accessed in other components
     return (
         <AnimalContext.Provider value={{
-            animals, getAnimals, addAnimal, getAnimalById, releaseAnimal, updateAnimal
+            animals, getAnimals, addAnimal, getAnimalById, releaseAnimal, 
+            updateAnimal, searchTerms, setSearchTerms
         }}>
             {props.children}
         </AnimalContext.Provider>
