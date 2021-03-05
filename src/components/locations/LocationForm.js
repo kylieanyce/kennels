@@ -76,25 +76,29 @@ export const LocationForm = () => {
     return (
         <form className="locationForm">
             <h2 className="locationForm__title">{locationId ? "Edit Location" : "Add Location"}</h2>
+            
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="name">location name:</label>
                     <input type="text" id="name" onChange={handleControlledInputChange} required autoFocus className="form-control" placeholder="location name" value={location.name} />
                 </div>
             </fieldset>
+
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="address">address:</label>
                     <input type="text" id="address" onChange={handleControlledInputChange} required autoFocus className="form-control" placeholder="location address" value={location.address} />
                 </div>
             </fieldset>
+
             <button className="btn btn-primary"
                 disabled={isLoading}
                 onClick={event => {
                     event.preventDefault()
                     handleSaveLocation()
                 }}>
-            {locationId ? "Save Location" : "Add Location"}</button>
+                {locationId ? "Save Location" : "Add Location"}
+            </button>
         </form>
     )
 }
