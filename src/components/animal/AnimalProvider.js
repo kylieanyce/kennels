@@ -13,7 +13,7 @@ export const AnimalProvider = (props) => {
     //fetch call returns data to setAnimals and useState changes
     //animals var to be set to the retrieved data
     const getAnimals = () => {
-        return fetch("http://localhost:8088/animals?_expand=location")
+        return fetch("http://localhost:8088/animals")
             .then(res => res.json())
             .then(setAnimals)
     }
