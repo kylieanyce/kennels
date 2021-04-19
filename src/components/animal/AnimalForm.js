@@ -72,7 +72,7 @@ export const AnimalForm = () => {
                     customerId: parseInt(animal.customerId)
                 })
                     // then redirects user to see updated animal list
-                    .then(() => history.push("/animals"))
+                    .then(() => history.push("/animal"))
             }
         }
     }
